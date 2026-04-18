@@ -2,7 +2,7 @@
  * Consolidated report: production dynamics (commits + chart + monthly contributors) and org contributors.
  * Run from the `.github` directory: node scripts/generate-production-report.mjs --org YourOrg
  *
- * Outputs: ProductionReport.md, images/commits-by-month.svg, images/commits-by-month.png (requires `npm install` at the `.github` repo root)
+ * Outputs: ProductionReport.md (chart image links to github.com/.../raw/.../images/commits-by-month.png), images/commits-by-month.svg, images/commits-by-month.png (`npm install` + sharp optional for PNG raster)
  */
 import * as fs from "node:fs/promises";
 import * as path from "node:path";
@@ -18,6 +18,12 @@ const FETCH_TIMEOUT_MS = 45_000;
 const SEARCH_DUMMY = "NOT doesnotexist12345";
 /** Parallel repo contributor fetches. Default 3: high values (e.g. 8) often cause empty response bodies on Windows/TLS when many sockets hit api.github.com at once. Override: GITHUB_REPO_CONCURRENCY=4 */
 const REPO_CONCURRENCY = Math.max(1, Number(process.env.GITHUB_REPO_CONCURRENCY ?? 3));
+
+/** Base URL for `raw` images in markdown (GitHub displays these reliably). Override: PRODUCTION_REPORT_RAW_BASE */
+const CHART_RAW_BASE = (process.env.PRODUCTION_REPORT_RAW_BASE ?? "https://github.com/HyperlinksSpace/.github/raw/main").replace(
+  /\/$/,
+  ""
+);
 
 function stripWrappingQuotes(value) {
   if (
@@ -238,17 +244,6 @@ function mdEscape(text) {
   return String(text).replaceAll("|", "\\|");
 }
 
-async function buildInlinePngHtml(pngPath) {
-  try {
-    const buf = await fs.readFile(pngPath);
-    const b64 = buf.toString("base64");
-    const dataUri = `data:image/png;base64,${b64}`;
-    return `<p align="center"><img src="${dataUri}" alt="Commits by month — red (lower) to green (higher) within this range" width="960" /></p>`;
-  } catch {
-    return null;
-  }
-}
-
 async function main() {
   await loadDotEnv();
   const { org, output, includeForks, includeArchived } = parseArgs(process.argv);
@@ -290,11 +285,12 @@ async function main() {
   const sumMonthly = counts.reduce((a, b) => a + b, 0);
 
   const svgPath = path.join(IMAGES_DIR, "commits-by-month.svg");
-  const pngPath = path.join(IMAGES_DIR, "commits-by-month.png");
   const chartTitle = `Commits by month (UTC committer date), ${org}`;
   await writeCommitsChartSvg(svgPath, sortedMonths, counts, chartTitle);
   const pngOk = await tryWriteChartPng(svgPath);
-  const inlineChart = pngOk ? await buildInlinePngHtml(pngPath) : null;
+  if (!pngOk) {
+    console.error("Warning: PNG not generated (optional: npm install at repo root for sharp). Chart markdown still uses raw GitHub URL.");
+  }
 
   console.error(
     `Fetching per-repo contributors for Contributors section (concurrency ${REPO_CONCURRENCY})…`
@@ -357,17 +353,12 @@ async function main() {
   lines.push("### Chart");
   lines.push("");
   lines.push(
-    `Vector: [\`images/commits-by-month.svg\`](images/commits-by-month.svg) · Raster: [\`images/commits-by-month.png\`](images/commits-by-month.png). **Y-axis** starts at **0**. **Bar colors** run red → green by commit volume within the chart range. The PNG below is inlined as a data URL so Markdown preview can render without loading files from disk.`
+    `Vector: [\`images/commits-by-month.svg\`](images/commits-by-month.svg) · Raster: [\`images/commits-by-month.png\`](images/commits-by-month.png). **Y-axis** starts at **0**. **Bar colors** run red → green by commit volume within the chart range. On **GitHub**, the chart image below uses an absolute \`raw\` URL so it renders like other org assets. For local preview, open [\`images/commits-by-month.png\`](images/commits-by-month.png).`
   );
   lines.push("");
-  if (inlineChart) {
-    lines.push("<!-- Inlined PNG for editor preview -->");
-    lines.push(inlineChart);
-  } else {
-    lines.push(`![Commits by month](images/commits-by-month.png)`);
-    lines.push("");
-    lines.push("*Inline PNG unavailable; run \`npm install\` at the repo root (this folder) and re-run to generate \`images/commits-by-month.png\`.*");
-  }
+  lines.push(
+    `![Commits by month — production chart](${CHART_RAW_BASE}/images/commits-by-month.png)`
+  );
   lines.push("");
 
   lines.push("### Monthly breakdown");

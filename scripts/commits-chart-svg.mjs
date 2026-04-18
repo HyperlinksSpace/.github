@@ -1,8 +1,20 @@
 /**
  * SVG bar chart for monthly commit counts (used by production-report.mjs).
+ * Dark theme (GitHub-style) for readability on github.com dark mode.
  * Y-axis pinned at 0; sparse X labels; red→green bar fill by value in range.
  */
 import * as fs from "node:fs/promises";
+
+/** Approx. GitHub dark theme (canvas / text / borders). */
+const D = {
+  bg: "#0d1117",
+  text: "#e6edf3",
+  textMuted: "#8b949e",
+  textSubtle: "#6e7681",
+  border: "#30363d",
+  grid: "#21262d",
+  axis: "#8b949e",
+};
 
 function escapeXml(s) {
   return String(s)
@@ -29,18 +41,18 @@ function lerp(a, b, t) {
   return a + (b - a) * t;
 }
 
-/** Red (low) → green (high) by value within [minV, maxV]. */
+/** Red (low) → green (high) on dark background — saturated for contrast. */
 function barColorRgb(value, minV, maxV) {
-  if (maxV <= minV) return "rgb(160, 160, 40)";
+  if (maxV <= minV) return "rgb(210, 153, 34)";
   const t = Math.min(1, Math.max(0, (value - minV) / (maxV - minV)));
-  const r = Math.round(lerp(214, 35, t));
-  const g = Math.round(lerp(48, 170, t));
-  const b = Math.round(lerp(48, 72, t));
+  const r = Math.round(lerp(248, 63, t));
+  const g = Math.round(lerp(81, 185, t));
+  const b = Math.round(lerp(73, 80, t));
   return `rgb(${r},${g},${b})`;
 }
 
 /**
- * SVG bar chart: Y starts at 0 (baseline aligned), sparse X labels, black text,
+ * SVG bar chart: Y starts at 0 (baseline aligned), sparse X labels, dark theme,
  * bar fill from red (fewer commits) to green (more) across the dataset range.
  */
 export function buildCommitsBarChartSvg(labels, values, title) {
@@ -68,31 +80,33 @@ export function buildCommitsBarChartSvg(labels, values, title) {
   parts.push(
     `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" width="${width}" height="${height}" role="img" aria-label="${escapeXml(title)}">`
   );
-  parts.push('<rect x="0" y="0" width="100%" height="100%" fill="#ffffff"/>');
+  parts.push(`<rect x="0" y="0" width="100%" height="100%" fill="${D.bg}"/>`);
   parts.push(
-    `<text x="${width / 2}" y="28" text-anchor="middle" fill="#000000" font-family="system-ui,Segoe UI,Helvetica,Arial,sans-serif" font-size="16" font-weight="600">${escapeXml(title)}</text>`
+    `<text x="${width / 2}" y="28" text-anchor="middle" fill="${D.text}" font-family="system-ui,Segoe UI,Helvetica,Arial,sans-serif" font-size="16" font-weight="600">${escapeXml(title)}</text>`
   );
 
   parts.push(
-    `<line x1="${padL}" y1="${baselineY}" x2="${padL + plotW}" y2="${baselineY}" stroke="#000000" stroke-width="1.5"/>`
+    `<line x1="${padL}" y1="${baselineY}" x2="${padL + plotW}" y2="${baselineY}" stroke="${D.axis}" stroke-width="1.5"/>`
   );
-  parts.push(`<line x1="${padL}" y1="${padT}" x2="${padL}" y2="${baselineY}" stroke="#000000" stroke-width="1.5"/>`);
+  parts.push(
+    `<line x1="${padL}" y1="${padT}" x2="${padL}" y2="${baselineY}" stroke="${D.axis}" stroke-width="1.5"/>`
+  );
 
   for (const tv of yTicks) {
     const yy = baselineY - (tv / yMax) * plotH;
     if (tv > 0) {
       parts.push(
-        `<line x1="${padL}" y1="${yy}" x2="${padL + plotW}" y2="${yy}" stroke="#e8e8e8" stroke-width="1"/>`
+        `<line x1="${padL}" y1="${yy}" x2="${padL + plotW}" y2="${yy}" stroke="${D.grid}" stroke-width="1"/>`
       );
     }
     const labelY = tv === 0 ? yy - 4 : yy + 4;
     parts.push(
-      `<text x="${padL - 8}" y="${labelY}" text-anchor="end" fill="#000000" font-family="system-ui,Segoe UI,Helvetica,Arial,sans-serif" font-size="12">${tv}</text>`
+      `<text x="${padL - 8}" y="${labelY}" text-anchor="end" fill="${D.textMuted}" font-family="system-ui,Segoe UI,Helvetica,Arial,sans-serif" font-size="12">${tv}</text>`
     );
   }
 
   parts.push(
-    `<text transform="translate(${padL - 42},${padT + plotH / 2}) rotate(-90)" text-anchor="middle" fill="#000000" font-family="system-ui,Segoe UI,Helvetica,Arial,sans-serif" font-size="13">Commits</text>`
+    `<text transform="translate(${padL - 42},${padT + plotH / 2}) rotate(-90)" text-anchor="middle" fill="${D.textMuted}" font-family="system-ui,Segoe UI,Helvetica,Arial,sans-serif" font-size="13">Commits</text>`
   );
 
   const slotW = n > 0 ? plotW / n : plotW;
@@ -105,7 +119,7 @@ export function buildCommitsBarChartSvg(labels, values, title) {
     const x = cx - barW / 2;
     const y = baselineY - h;
     parts.push(
-      `<rect x="${x.toFixed(2)}" y="${y.toFixed(2)}" width="${barW.toFixed(2)}" height="${h.toFixed(2)}" fill="${barColorRgb(v, minVal, maxVal)}" stroke="#333333" stroke-width="0.3"/>`
+      `<rect x="${x.toFixed(2)}" y="${y.toFixed(2)}" width="${barW.toFixed(2)}" height="${h.toFixed(2)}" fill="${barColorRgb(v, minVal, maxVal)}" stroke="${D.border}" stroke-width="0.45"/>`
     );
   }
 
@@ -115,13 +129,13 @@ export function buildCommitsBarChartSvg(labels, values, title) {
     const lab = labels[i];
     parts.push(`<g transform="translate(${cx.toFixed(2)},${baselineY + 14}) rotate(-42)">`);
     parts.push(
-      `<text text-anchor="end" fill="#000000" font-family="system-ui,Segoe UI,Helvetica,Arial,sans-serif" font-size="10">${escapeXml(lab)}</text>`
+      `<text text-anchor="end" fill="${D.textMuted}" font-family="system-ui,Segoe UI,Helvetica,Arial,sans-serif" font-size="10">${escapeXml(lab)}</text>`
     );
     parts.push("</g>");
   }
 
   parts.push(
-    `<text x="${width / 2}" y="${height - 20}" text-anchor="middle" fill="#000000" font-family="system-ui,Segoe UI,Helvetica,Arial,sans-serif" font-size="11">Bar color: red = fewer commits in this range · green = more · Y-axis is 0 at the baseline.</text>`
+    `<text x="${width / 2}" y="${height - 20}" text-anchor="middle" fill="${D.textSubtle}" font-family="system-ui,Segoe UI,Helvetica,Arial,sans-serif" font-size="11">Bar color: red = fewer commits in this range · green = more · Y-axis is 0 at the baseline.</text>`
   );
   parts.push("</svg>");
   return parts.join("\n");
