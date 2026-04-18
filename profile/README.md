@@ -1,3 +1,3 @@
-![https://wwww.hyperlinks.space/](https://github.com/HyperlinksSpace/.github/raw/main/HyperlinksSpace.png)
+[https://wwww.hyperlinks.space/](https://wwww.hyperlinks.space/)
 
-Cross Industrial Title. Now AI and blockhcain solutions, multiplatform programs, human engineering, addressing [www.landing.program.hyperlinks.space](https://www.landing.app.hyperlinks.space). Check out our [Contributors](../Contributors.md).
+Cross Industrial Title. Now AI and blockhcain solutions, multiplatform programs, human engineering, addressing [www.landing.program.hyperlinks.space](https://www.landing.app.hyperlinks.space). See the **[production & contributors report](../ProductionReport.md)** and the **[Contributors** section](../ProductionReport.md#contributors).

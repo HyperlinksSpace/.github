@@ -1,4 +1,4 @@
-// npx tsx scripts/contributors.ts --org HyperlinksSpace --out Contributors.md
+// Run from `.github`: npx tsx scripts/contributors.ts --org HyperlinksSpace --out Contributors.md
 
 import * as fs from "node:fs/promises";
 import * as path from "node:path";

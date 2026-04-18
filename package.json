@@ -1,0 +1,11 @@
+{
+  "name": "hyperlinks-github-org-reports",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "report": "node scripts/generate-production-report.mjs --org HyperlinksSpace"
+  },
+  "dependencies": {
+    "sharp": "^0.33.5"
+  }
+}
