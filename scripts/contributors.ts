@@ -35,12 +35,14 @@ function stripWrappingQuotes(value: string): string {
   return value;
 }
 
+const DOTENV_OVERRIDE_KEYS = new Set(["GITHUB_TOKEN"]);
+
 async function loadDotEnv(): Promise<void> {
   const envPath = path.resolve(process.cwd(), ".env");
 
   let raw = "";
   try {
-    raw = await fs.readFile(envPath, "utf8");
+    raw = (await fs.readFile(envPath, "utf8")).replace(/^\uFEFF/u, "");
   } catch {
     return;
   }
@@ -56,7 +58,8 @@ async function loadDotEnv(): Promise<void> {
     const value = stripWrappingQuotes(line.slice(eqIndex + 1).trim());
 
     if (!key) continue;
-    if (!Object.prototype.hasOwnProperty.call(process.env, key)) {
+    const override = DOTENV_OVERRIDE_KEYS.has(key) && value.length > 0;
+    if (override || !Object.prototype.hasOwnProperty.call(process.env, key)) {
       process.env[key] = value;
     }
   }

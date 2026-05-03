@@ -14,7 +14,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(__dirname, "..");
 const IMAGES_DIR = path.join(REPO_ROOT, "images");
 const API_BASE = "https://api.github.com";
-const FETCH_TIMEOUT_MS = 45_000;
+const FETCH_TIMEOUT_MS = 90_000;
 const SEARCH_DUMMY = "NOT doesnotexist12345";
 /** Parallel repo contributor fetches. Default 3: high values (e.g. 8) often cause empty response bodies on Windows/TLS when many sockets hit api.github.com at once. Override: GITHUB_REPO_CONCURRENCY=4 */
 const REPO_CONCURRENCY = Math.max(1, Number(process.env.GITHUB_REPO_CONCURRENCY ?? 3));
@@ -35,10 +35,13 @@ function stripWrappingQuotes(value) {
   return value;
 }
 
+/** Keys that `.env` should always set when non-empty (shell often has a stale or empty `GITHUB_TOKEN`). */
+const DOTENV_OVERRIDE_KEYS = new Set(["GITHUB_TOKEN"]);
+
 async function loadDotEnv() {
   const envPath = path.join(REPO_ROOT, ".env");
   try {
-    const raw = await fs.readFile(envPath, "utf8");
+    const raw = (await fs.readFile(envPath, "utf8")).replace(/^\uFEFF/u, "");
     for (const originalLine of raw.split(/\r?\n/u)) {
       const line = originalLine.trim();
       if (!line || line.startsWith("#")) continue;
@@ -46,7 +49,9 @@ async function loadDotEnv() {
       if (eqIndex <= 0) continue;
       const key = line.slice(0, eqIndex).trim();
       const value = stripWrappingQuotes(line.slice(eqIndex + 1).trim());
-      if (key && !Object.prototype.hasOwnProperty.call(process.env, key)) {
+      if (!key) continue;
+      const override = DOTENV_OVERRIDE_KEYS.has(key) && value.length > 0;
+      if (override || !Object.prototype.hasOwnProperty.call(process.env, key)) {
         process.env[key] = value;
       }
     }
@@ -107,7 +112,16 @@ async function githubRequest(url, token, attempt = 1) {
     });
     const text = await response.text();
     if (!response.ok) {
-      throw new Error(`GitHub API ${response.status} for ${url}\n${text}`);
+      const err = new Error(`GitHub API ${response.status} for ${url}\n${text}`);
+      if (response.status === 401) {
+        err.noRetry = true;
+        err.message = `${err.message}\n\nFix: set a valid GITHUB_TOKEN in ${path.join(
+          REPO_ROOT,
+          ".env"
+        )} (no quotes needed). Fine-grained PAT needs repo read + metadata on the org; commit search may require classic \`repo\` scope or equivalent access.`;
+      }
+      if (response.status === 403) err.noRetry = true;
+      throw err;
     }
     /** GitHub sometimes returns 204 No Content for “no data” list views (e.g. contributors) instead of 200 + `[]`. */
     if (response.status === 204) {
@@ -125,6 +139,7 @@ async function githubRequest(url, token, attempt = 1) {
     }
     return JSON.parse(trimmed);
   } catch (err) {
+    if (err?.noRetry) throw err;
     if (attempt < 5) {
       const wait = 1500 * 2 ** (attempt - 1);
       console.error(`Request failed (attempt ${attempt}), retry in ${wait}ms: ${String(err?.cause ?? err)}`);
@@ -162,6 +177,29 @@ function monthUtcRange(year, month) {
   const d = pad2(last.getUTCDate());
   const lastStr = `${y}-${m}-${d}`;
   return `${first}..${lastStr}`;
+}
+
+/** `committer-date` range; for the UTC month still in progress, end on `throughUtc`’s calendar day (UTC). */
+function monthUtcRangeForSearch(year, month, throughUtc) {
+  const first = `${year}-${pad2(month)}-01`;
+  const sameMonth =
+    throughUtc.getUTCFullYear() === year && throughUtc.getUTCMonth() + 1 === month;
+  if (sameMonth) {
+    const y = throughUtc.getUTCFullYear();
+    const m = pad2(throughUtc.getUTCMonth() + 1);
+    const d = pad2(throughUtc.getUTCDate());
+    return `${first}..${y}-${m}-${d}`;
+  }
+  return monthUtcRange(year, month);
+}
+
+function isUtcCurrentMonthRow(year, month, measurementUtc) {
+  return measurementUtc.getUTCFullYear() === year && measurementUtc.getUTCMonth() + 1 === month;
+}
+
+function monthTableLabel(key, year, month, measurementUtc) {
+  if (isUtcCurrentMonthRow(year, month, measurementUtc)) return `${key} (Current)`;
+  return key;
 }
 
 function enumerateMonths(fromYear, fromMonth, toYear, toMonth) {
@@ -262,17 +300,21 @@ async function main() {
   const searchTotal = await searchCommitTotal(baseQuery, githubToken);
   await sleep(2100);
 
-  const now = new Date();
-  const endYear = now.getUTCFullYear();
-  const endMonth = now.getUTCMonth() + 1;
+  /** Anchor for monthly `committer-date` ranges, `(Current)` row, and displayed measurement (same instant — avoids date skew if the API loop crosses midnight UTC). */
+  const measurementUtc = new Date();
+  const endYear = measurementUtc.getUTCFullYear();
+  const endMonth = measurementUtc.getUTCMonth() + 1;
   const months = enumerateMonths(2022, 1, endYear, endMonth);
+  const monthlyMeasuredIso = measurementUtc.toISOString();
+  const monthlyMeasuredUtcDay = monthlyMeasuredIso.slice(0, 10);
 
   const monthlyStats = new Map();
   console.error(`Monthly commit search (${months.length} months)…`);
+  console.error(`Measurement anchor (UTC): ${monthlyMeasuredIso}`);
 
   for (let i = 0; i < months.length; i += 1) {
     const { y, m, key } = months[i];
-    const range = monthUtcRange(y, m);
+    const range = monthUtcRangeForSearch(y, m, measurementUtc);
     const stats = await searchMonthCommitStats(baseQuery, range, githubToken);
     monthlyStats.set(key, stats);
     console.error(`  ${key}: commits=${stats.commits} contributors=${stats.contributors}${stats.contributorsCapped ? " (sample cap)" : ""}`);
@@ -280,13 +322,14 @@ async function main() {
   }
 
   const sortedMonths = months.map(({ key }) => key);
+  const chartLabels = months.map(({ y, m, key }) => monthTableLabel(key, y, m, measurementUtc));
   const counts = sortedMonths.map((k) => monthlyStats.get(k)?.commits ?? 0);
   const maxCount = counts.length ? Math.max(...counts) : 0;
   const sumMonthly = counts.reduce((a, b) => a + b, 0);
 
   const svgPath = path.join(IMAGES_DIR, "commits-by-month.svg");
-  const chartTitle = `Commits by month (UTC committer date), ${org}`;
-  await writeCommitsChartSvg(svgPath, sortedMonths, counts, chartTitle);
+  const chartTitle = `Commits by month (UTC), ${org} — ${monthlyMeasuredUtcDay} · ${monthlyMeasuredIso}`;
+  await writeCommitsChartSvg(svgPath, chartLabels, counts, chartTitle);
   const pngOk = await tryWriteChartPng(svgPath);
   if (!pngOk) {
     console.error("Warning: PNG not generated (optional: npm install at repo root for sharp). Chart markdown still uses raw GitHub URL.");
@@ -329,6 +372,16 @@ async function main() {
 
   const ranked = Array.from(contributorsMap.values()).sort((a, b) => b.totalCommits - a.totalCommits);
   const generatedAt = new Date().toISOString();
+  const rangeStart = sortedMonths[0] ?? "n/a";
+  const rangeEndLabel =
+    months.length > 0
+      ? monthTableLabel(
+          months[months.length - 1].key,
+          months[months.length - 1].y,
+          months[months.length - 1].m,
+          measurementUtc
+        )
+      : "n/a";
   const lines = [];
 
   lines.push(`# ${org} — production & contributors (GitHub API)`);
@@ -346,7 +399,7 @@ async function main() {
   lines.push("| --- | ---: |");
   lines.push(`| Organization | \`${org}\` |`);
   lines.push(`| **Total commits (org search)** | **${searchTotal}** |`);
-  lines.push(`| Sum of monthly commit counts (${sortedMonths[0] ?? "n/a"}–${sortedMonths[sortedMonths.length - 1] ?? "n/a"}) | ${sumMonthly} |`);
+  lines.push(`| Sum of monthly commit counts (${rangeStart}–${rangeEndLabel}) | ${sumMonthly} |`);
   lines.push(`| Contributor commit sum, non-fork non-archived repos (${filteredRepos.length} repos) | ${contributorFilteredTotal} |`);
   lines.push("");
 
@@ -361,7 +414,13 @@ async function main() {
   );
   lines.push("");
 
-  lines.push("### Monthly breakdown");
+  lines.push(
+    `### Monthly breakdown (UTC) — measurement UTC date **${monthlyMeasuredUtcDay}** · full timestamp \`${monthlyMeasuredIso}\``
+  );
+  lines.push("");
+  lines.push(
+    "**(Current)** on the last row means the UTC calendar month was still in progress at measurement time (counts include only commits through that UTC date, same as the chart)."
+  );
   lines.push("");
   lines.push(
     "`*` = that month has more than **1000** commits in GitHub search; only the first 1000 results are available, so **contributor count may be understated** (distinct authors in the sample)."
@@ -370,12 +429,15 @@ async function main() {
   lines.push("| Month (UTC) | Commits | Contributors | Bar (scaled) |");
   lines.push("| --- | ---: | ---: | --- |");
   const barWidth = 28;
-  for (const k of sortedMonths) {
+  for (let mi = 0; mi < sortedMonths.length; mi += 1) {
+    const k = sortedMonths[mi];
+    const { y, m } = months[mi];
+    const rowMonth = monthTableLabel(k, y, m, measurementUtc);
     const st = monthlyStats.get(k);
     const n = st?.commits ?? 0;
     const c = st?.contributors ?? 0;
     const cap = st?.contributorsCapped ? " *" : "";
-    lines.push(`| ${k} | ${n} | ${c}${cap} | \`${asciiBar(n, maxCount, barWidth)}\` |`);
+    lines.push(`| ${mdEscape(rowMonth)} | ${n} | ${c}${cap} | \`${asciiBar(n, maxCount, barWidth)}\` |`);
   }
   lines.push("");
 

@@ -1,6 +1,6 @@
 # HyperlinksSpace — production & contributors (GitHub API)
 
-Generated at: 2026-04-18T00:36:38.582Z
+Generated at: 2026-05-03T15:59:54.564Z
 
 ## Production dynamics
 
@@ -9,17 +9,19 @@ Commit totals use the [GitHub Commit Search API](https://docs.github.com/en/rest
 | Metric | Value |
 | --- | ---: |
 | Organization | `HyperlinksSpace` |
-| **Total commits (org search)** | **2157** |
-| Sum of monthly commit counts (2022-01–2026-04) | 2157 |
-| Contributor commit sum, non-fork non-archived repos (81 repos) | 2129 |
+| **Total commits (org search)** | **2276** |
+| Sum of monthly commit counts (2022-01–2026-05 (Current)) | 2276 |
+| Contributor commit sum, non-fork non-archived repos (81 repos) | 2248 |
 
 ### Chart
 
-Vector: [`images/commits-by-month.svg`](images/commits-by-month.svg) · Raster: [`images/commits-by-month.png`](images/commits-by-month.png). **Y-axis** starts at **0**. **Bar colors** run red → green by commit volume within the chart range. On **GitHub**, the chart displays via the absolute URL below (same pattern as other org assets). For local preview, use the committed file at [`images/commits-by-month.png`](images/commits-by-month.png).
+Vector: [`images/commits-by-month.svg`](images/commits-by-month.svg) · Raster: [`images/commits-by-month.png`](images/commits-by-month.png). **Y-axis** starts at **0**. **Bar colors** run red → green by commit volume within the chart range. On **GitHub**, the chart image below uses an absolute `raw` URL so it renders like other org assets. For local preview, open [`images/commits-by-month.png`](images/commits-by-month.png).
 
 ![Commits by month — production chart](https://github.com/HyperlinksSpace/.github/raw/main/images/commits-by-month.png)
 
-### Monthly breakdown
+### Monthly breakdown (UTC) — measurement UTC date **2026-05-03** · full timestamp `2026-05-03T15:57:04.388Z`
+
+**(Current)** on the last row means the UTC calendar month was still in progress at measurement time (counts include only commits through that UTC date, same as the chart).
 
 `*` = that month has more than **1000** commits in GitHub search; only the first 1000 results are available, so **contributor count may be understated** (distinct authors in the sample).
 
@@ -34,30 +36,30 @@ Vector: [`images/commits-by-month.svg`](images/commits-by-month.svg) · Raster: 
 | 2022-07 | 2 | 1 | `····························` |
 | 2022-08 | 0 | 0 | `····························` |
 | 2022-09 | 9 | 1 | `█···························` |
-| 2022-10 | 19 | 1 | `██··························` |
-| 2022-11 | 42 | 1 | `████························` |
+| 2022-10 | 19 | 1 | `█···························` |
+| 2022-11 | 42 | 1 | `███·························` |
 | 2022-12 | 2 | 1 | `····························` |
 | 2023-01 | 2 | 1 | `····························` |
-| 2023-02 | 47 | 2 | `█████·······················` |
-| 2023-03 | 27 | 2 | `███·························` |
+| 2023-02 | 47 | 2 | `███·························` |
+| 2023-03 | 27 | 2 | `██··························` |
 | 2023-04 | 8 | 1 | `█···························` |
 | 2023-05 | 10 | 2 | `█···························` |
-| 2023-06 | 6 | 2 | `█···························` |
+| 2023-06 | 6 | 2 | `····························` |
 | 2023-07 | 24 | 1 | `██··························` |
 | 2023-08 | 22 | 3 | `██··························` |
 | 2023-09 | 25 | 5 | `██··························` |
-| 2023-10 | 53 | 4 | `█████·······················` |
+| 2023-10 | 53 | 4 | `████························` |
 | 2023-11 | 4 | 2 | `····························` |
-| 2023-12 | 19 | 3 | `██··························` |
-| 2024-01 | 51 | 4 | `█████·······················` |
-| 2024-02 | 147 | 7 | `██████████████··············` |
-| 2024-03 | 160 | 6 | `████████████████············` |
-| 2024-04 | 49 | 4 | `█████·······················` |
-| 2024-05 | 17 | 3 | `██··························` |
+| 2023-12 | 19 | 3 | `█···························` |
+| 2024-01 | 51 | 4 | `████························` |
+| 2024-02 | 147 | 7 | `███████████·················` |
+| 2024-03 | 160 | 6 | `████████████················` |
+| 2024-04 | 49 | 4 | `████························` |
+| 2024-05 | 17 | 3 | `█···························` |
 | 2024-06 | 0 | 0 | `····························` |
-| 2024-07 | 56 | 3 | `█████·······················` |
-| 2024-08 | 44 | 1 | `████························` |
-| 2024-09 | 58 | 2 | `██████······················` |
+| 2024-07 | 56 | 3 | `████························` |
+| 2024-08 | 44 | 1 | `███·························` |
+| 2024-09 | 58 | 2 | `████························` |
 | 2024-10 | 4 | 1 | `····························` |
 | 2024-11 | 4 | 1 | `····························` |
 | 2024-12 | 4 | 2 | `····························` |
@@ -65,18 +67,19 @@ Vector: [`images/commits-by-month.svg`](images/commits-by-month.svg) · Raster: 
 | 2025-02 | 2 | 1 | `····························` |
 | 2025-03 | 3 | 1 | `····························` |
 | 2025-04 | 0 | 0 | `····························` |
-| 2025-05 | 6 | 2 | `█···························` |
+| 2025-05 | 6 | 2 | `····························` |
 | 2025-06 | 0 | 0 | `····························` |
 | 2025-07 | 3 | 1 | `····························` |
 | 2025-08 | 12 | 1 | `█···························` |
-| 2025-09 | 58 | 1 | `██████······················` |
-| 2025-10 | 80 | 2 | `████████····················` |
-| 2025-11 | 88 | 2 | `█████████···················` |
-| 2025-12 | 98 | 1 | `██████████··················` |
-| 2026-01 | 47 | 1 | `█████·······················` |
-| 2026-02 | 256 | 2 | `█████████████████████████···` |
-| 2026-03 | 287 | 2 | `████████████████████████████` |
-| 2026-04 | 287 | 1 | `████████████████████████████` |
+| 2025-09 | 58 | 1 | `████························` |
+| 2025-10 | 80 | 2 | `██████······················` |
+| 2025-11 | 88 | 2 | `██████······················` |
+| 2025-12 | 98 | 1 | `███████·····················` |
+| 2026-01 | 47 | 1 | `███·························` |
+| 2026-02 | 256 | 2 | `███████████████████·········` |
+| 2026-03 | 287 | 2 | `█████████████████████·······` |
+| 2026-04 | 386 | 1 | `████████████████████████████` |
+| 2026-05 (Current) | 20 | 1 | `█···························` |
 
 ## Contributors
 
@@ -88,7 +91,7 @@ Repositories scanned: **81** · Unique contributors: **22**
 
 | Rank | Contributor | Total commits | Profile |
 | ---: | --- | ---: | --- |
-| 1 | staindart | 1513 | [https://github.com/staindart](https://github.com/staindart) |
+| 1 | anriltine | 1632 | [https://github.com/anriltine](https://github.com/anriltine) |
 | 2 | justdmitry | 129 | [https://github.com/justdmitry](https://github.com/justdmitry) |
 | 3 | Dhereal1 | 102 | [https://github.com/Dhereal1](https://github.com/Dhereal1) |
 | 4 | alerdenisov | 76 | [https://github.com/alerdenisov](https://github.com/alerdenisov) |
@@ -113,19 +116,20 @@ Repositories scanned: **81** · Unique contributors: **22**
 
 ### Per-contributor repository breakdown
 
-#### 1. [staindart](https://github.com/staindart)
-Total commits: **1513**
+#### 1. [anriltine](https://github.com/anriltine)
+Total commits: **1632**
 
-- HyperlinksSpaceProgram: 828
+- HyperlinksSpaceProgram: 878
 - whatswap: 119
+- TinyModel: 107
 - a-dao: 98
-- TinyModel: 48
 - payments_counter: 42
 - HyperlinksSpaceWebsite: 30
 - ton-editable-minter: 27
 - FastTonTradeBot: 26
 - ton-dictionaries-template: 23
 - BlockchainProgram: 21
+- .github: 20
 - a-tdp-template: 19
 - FUNK: 19
 - x2lottery: 14
@@ -134,7 +138,6 @@ Total commits: **1513**
 - HyperlinksSpaceProgramLanding: 13
 - ton-nft-dapp: 12
 - a-careers-smc: 10
-- .github: 10
 - TON_add_number_contract: 9
 - freelance-exchange-tdb: 9
 - desde: 9
