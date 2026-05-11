@@ -42,4 +42,4 @@ We are looking for pioneers, visionaries, and "digital nomads" who understand th
 - **Visionaries:** integrate your projects into the Hyperlinks ecosystem.
 - **Partners:** let’s build the first Martian node together.
 
-[Explore documentation](https://hyperlinks.space/) | [View roadmap 2030](https://www.landing.app.hyperlinks.space) | [Connect via AI Transmitter](https://hyperlinks.space/)
+[Roadmap](https://github.com/orgs/HyperlinksSpace/projects/1)
