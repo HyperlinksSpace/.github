@@ -89,7 +89,7 @@ Our roadmap for deploying localized nodes **across Earth and the solar system**.
 
 ## 🌍 From Earth to the stars
 
-Founded in the heart of Eurasia, Hyperlinks Space was born from a radical idea: true innovation is more about vision than an office in a skyscraper.
+Founded in the heart of Eurasia, Hyperlinks Space was born from a radical idea: we build trully innovative company, business and enterprise that are driven by the more vision more than by an office in a skyscraper, still with it of course 😊.
 
 The company operates across multiple industries internationally — AI, blockchain, and social networks in IT, on many devices and operating systems, with involvement in finance and human engineering. Our [landing program](https://www.landing.app.hyperlinks.space) partially reveals the Hyperlinks Space Program we are developing. You can follow this resource’s development in the [Production Report](../ProductionReport.md).
 
