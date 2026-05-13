@@ -2,32 +2,32 @@
 
 # 🌌 Hyperlinks Space: The full interplanetary cycle
 
-The core operating system for a multi-planetary future — not only how networks are designed, but how resources move, settlements operate, and infrastructure grows and heals across distance and time.
+The core operating system for a multi-planetary future — not only how networks are designed, but how resources move, settlements operate, and infrastructure grows and heals **across Earth and space** as one cross-planetary stack.
 
 ## 🔭 Our mission
 
 At Hyperlinks Space, we believe that the expansion of humanity into the stars depends on one thing: the seamless flow of information and value. We are building the protocols, AI models, and financial layers that will connect Earth, the Moon, and Mars into a single, unified cognitive network.
 
-We do not just build software; we build the **digital nervous system** for the next stage of human evolution — spanning extraction, logistics, communication, computation, habitation, supply, expansion, and recovery.
+We do not just build software; we build the **digital nervous system** for the next stage of human evolution — spanning extraction, logistics, communication, computation, habitation, supply, expansion, and recovery — with **Earth as the anchor economy** and every other destination on the same rails.
 
 ## 🎯 Interplanetary market priorities
 
-A serious interplanetary economy is not a single product line; it is a **closed loop** of capabilities. These priorities guide what we build and how we partner. They are the cycle we optimize for end to end.
+A serious interplanetary economy is not a single product line; it is a **closed loop** of capabilities. These priorities guide what we build and how we partner. They are the cycle we optimize for end to end — **terrestrial and off-planet**, because the same custody, scheduling, and intelligence problems show up in a mine on Earth, a plant in orbit, and a regolith processor on the Moon.
 
 | Priority | What it means for us |
 | -------- | -------------------- |
-| **Resources extraction** | Metals, volatiles, and bulk feedstock mined or harvested on the Moon, Mars, asteroids, and other bodies — with software for prospecting, provenance, grades, custody, and markets so off-world material becomes a traded, schedulable input to the wider economy. |
-| **Transportation** | Moving mass and payloads reliably across orbits and surfaces — scheduling, custody, and trust layers so logistics survives delay and fragmentation. |
+| **Resources extraction** | **Earth and beyond:** metals, minerals, energy carriers, water, and bulk feedstock from **terrestrial mines, energy systems, and primary industry** as well as the Moon, Mars, asteroids, and other bodies — one software and market layer for prospecting, provenance, grades, custody, and scheduling so material flows are legible whether the dig is in **Siberia or Shackleton**. |
+| **Transportation** | Moving mass and payloads across **Earth logistics, launch, cislunar space, and other surfaces** — scheduling, custody, and trust layers so a container, a fairing, or a lander leg is always a first-class object in the same graph. |
 | **Communication** | Low-latency where possible, honest latency where not: resilient links, synchronization, and messaging that keep settlements, markets, and AI coherent. |
 | **Processing everything** | Intelligence and settlement logic at the edge — inference, automation, and decision systems that run where the bits meet the atoms, not only in terrestrial clouds. |
-| **Inhabitation** | Sustained **human and robotic** presence off-world: **viable built environments** (pressure, thermal, radiation, life support, power) and, where a body’s physics allows, **long-horizon terraforming** as phased planetary engineering — plus the **software, markets, and governance** that coordinate habitats, crews, precursors, and multi-decade programs so settlements stay solvent and survivable when Earth is far. |
+| **Inhabitation** | Sustained **human and robotic** presence **on Earth and off it**: **viable built environments** (pressure, thermal, radiation, life support, power) from megaprojects and resilient cities **here** to bases **out there**; and, where a body’s physics allows, **long-horizon terraforming** as phased planetary engineering — plus the **software, markets, and governance** that coordinate habitats, crews, precursors, and multi-decade programs so settlements stay solvent and survivable across distance. |
 | **Supply** | End-to-end chains for parts, consumables, and capital — inventory, finance, and continuity when resupply windows are narrow or uncertain. |
-| **Automatic expansion** | **Von Neumann–style** industrial scaling: capacity that copies itself using local feedstock — **robots building robots** (machine shops assembling assemblers, fabs bootstrapping from regolith and refined metals) so throughput grows with the site, not only with launches from Earth. Repeatable software stacks, protocols, and operator playbooks so expansion compounds instead of stalling. |
-| **Self-rebuilding** | The long-lived counterpart to replication: **robotic maintenance and autonomous repair** — spare logistics, hot-swappable nodes, in-situ remanufacturing, and fleets that re-wire and replace modules when links fail or environments degrade. A closed loop between **self-expansion** and **self-healing** so infrastructure survives without constant human babysitting. |
+| **Automatic expansion** | **Von Neumann–style** industrial scaling: capacity that copies itself using **local feedstock on Earth and on other worlds** — **robots building robots** (terrestrial fabs and machine parks as well as shops bootstrapping from regolith and refined metals in space) so throughput grows with the site. Repeatable software stacks, protocols, and operator playbooks so expansion compounds instead of stalling. |
+| **Self-rebuilding** | The long-lived counterpart to replication: **robotic maintenance and autonomous repair** — spare logistics, hot-swappable nodes, in-situ remanufacturing, and fleets that re-wire and replace modules when links fail or environments degrade, **whether the asset is a grid on Earth or a node in orbit**. A closed loop between **self-expansion** and **self-healing** so infrastructure survives without constant human babysitting. |
 
 ### 🏠 Inhabitation: pathways to viable environments
 
-There is no single “winning habitat.” **Each body imposes a different physics budget** — vacuum depth, dust, day–night cycles, radiation, water and volatiles, gravity, and how far you are from industrial resupply. Viable inhabitation is usually a **portfolio** of physical means and operational layers, phased so risk drops as local industry and data improve.
+There is no single “winning habitat.” **Each place imposes a different physics and logistics budget** — from Earth’s weather, biosphere, and dense grids to vacuum, dust, radiation, and long resupply on the Moon or Mars. Viable inhabitation is usually a **portfolio** of physical means and operational layers, phased so risk drops as local industry and data improve, **with Earth and off-world sites sharing the same program DNA where it makes sense**.
 
 **Physical and architectural levers (often combined):**
 
@@ -54,18 +54,22 @@ We treat **automatic expansion** and **self-rebuilding** as one mechanical story
 
 ### 💼 Core engines of revenue
 
-These are the main ways Hyperlinks Space turns the cycle into a business — aligned with the priorities above and the product pillars below.
+Revenue is not a side list — it is **indexed to the interplanetary market priorities** in the table above. Each priority is a lane we can monetize through software, protocols, data, and program economics.
 
-- **Edge AI & TinyModel** — runtime licenses, hardened deployments, and operator tooling for inference and automation where cloud latency is unacceptable (rovers, plants, settlements, terrestrial critical infrastructure).
-- **AI Transmitter & protocol economics** — usage, routing, and settlement around secure synchronization, messaging, and cross-network coherence (including asset and data flows that sit on shared rails).
-- **Hyperlinks Space Program (HSP)** — program software, node packages, landing experiences, and partner integrations for localized, financially sovereign deployments.
-- **Market & custody infrastructure** — fees and services tied to **provenance, scheduling, and custody** of off-world material, logistics windows, and multi-party settlement (the “who owns what, where, when” layer for an interplanetary market).
-- **Enterprise & operator contracts** — bespoke integration, reliability SLAs, and mission-specific stacks for organizations that need the full cycle under one supported umbrella.
-- **Data & coordination services** — analytics, risk, and planning layers on top of telemetry and supply graphs (always bounded by customer consent and contractual scope).
+- **Resources extraction** — marketplace and **clearing fees** on graded, custodied lots; **subscriptions** for prospecting, assay, and inventory-of-place APIs; **title and provenance** services (Earth and off-world); **operator integrations** for mines, wells, ISRU pilots, and regolith processors; **risk and certification** bundles for counterparties buying volatile or strategic feedstock.
+- **Transportation** — **slot, route, and capacity** products (surface, sea, air, launch, orbit, lander legs); **custody and handoff** fees per leg; **escrow and settlement** on delayed or contested delivery; **telemetry and ETA** data feeds sold to insurers and traders; **intermodal orchestration** licenses so mass stays one object across carriers.
+- **Communication** — **AI Transmitter** metering: message volume, premium routes, SLA links, and cross-network **synchronization**; **asset-swap and messaging** fees on shared rails; **enterprise interconnect** (private meshes, gateways); **coherence services** (ordering, conflict resolution, audit logs) for operators who cannot afford split-brain markets.
+- **Processing everything** — **TinyModel** runtime licenses, **inference metering**, and fleet-wide **edge deployment** tooling; **automation and settlement** fees where models trigger actions (rovers, plants, settlements, terrestrial critical systems); **fine-tuning and safety** packages for regulated environments; **hardware bring-up** SKUs for new silicon or rugged nodes.
+- **Inhabitation** — **HSP** program software, **node and landing** packages, and partner **integration** fees; **digital twin and ops** hosting for habitats and megaprojects; **life-support and environmental** telemetry products; **terraforming and planetary-engineering** program registries, **release accounting**, and long-horizon **governance-as-a-service** where institutions pay for auditable state; **training and certification** for crews and precursors.
+- **Supply** — **inventory, MRO, and spare-pool** software fees; **trade-credit and invoice** rails on protocol; **vendor and contractor** onboarding; **procurement copilots** (search, compliance, substitution); **take rates** on curated spare-parts or consumables marketplaces tied to custody IDs.
+- **Automatic expansion** — **replication playbooks** and **factory automation** stacks sold per site; **license and rev-share** on capacity that clones itself (machine parks, remote fabs); **governance templates** for scaling nodes without heroics; **partner bounties** for verified expansion milestones on the network.
+- **Self-rebuilding** — **diagnostics, RCM, and incident** analytics subscriptions; **remote repair and remanufacturing** workflow fees; **spare logistics and swap-pool** management; **uptime and resilience** retainers for grids, plants, and orbital assets; **forensic and rollback** packages after faults (links, dust, radiation, software drift).
+
+**Cross-cutting (spans multiple priorities):** **enterprise and operator contracts** — bespoke integration, SLAs, and mission-specific stacks; **data and coordination services** — analytics, forecasting, and planning on combined telemetry and supply graphs (always bounded by customer consent and contractual scope).
 
 Our product pillars below map directly onto this cycle: **AI Transmitter** for communication and coherence, **TinyModel** for processing at the edge, and the **Hyperlinks Space Program** for inhabitation, supply, and physical rollout.
 
-## 🛠 Core pillars of the empire
+## 🛠 Core pillars
 
 ### 🧠 1. TinyModel: the edge intelligence
 
@@ -81,7 +85,7 @@ The link between worlds. A revolutionary protocol that synchronizes data across 
 
 ### 🛰 3. Hyperlinks Space Program (HSP): the physical frontier
 
-Our roadmap for deploying localized nodes across the solar system. We provide the software infrastructure for the first lunar colonies, ensuring they are financially independent and technologically sovereign — tying **inhabitation**, **supply**, and **resources** to executable programs on the ground. That includes the **operating layer** for phased occupancy: precursors, habitat interfaces, life-support telemetry, and settlement economics so environments stay viable as the site matures. Track the program in **[HyperlinksSpaceProgram](https://github.com/HyperlinksSpace/HyperlinksSpaceProgram)** and the **[HyperlinksSpaceProgramLanding](https://github.com/HyperlinksSpace/HyperlinksSpaceProgramLanding)** experience.
+Our roadmap for deploying localized nodes **across Earth and the solar system**. We provide the software infrastructure for the first lunar colonies and for **terrestrial nodes in the same network**, ensuring deployments are financially independent and technologically sovereign — tying **inhabitation**, **supply**, and **resources** to executable programs **on the ground and in orbit**. That includes the **operating layer** for phased occupancy: precursors, habitat interfaces, life-support telemetry, and settlement economics so environments stay viable as each site matures. Track the program in **[HyperlinksSpaceProgram](https://github.com/HyperlinksSpace/HyperlinksSpaceProgram)** and the **[HyperlinksSpaceProgramLanding](https://github.com/HyperlinksSpace/HyperlinksSpaceProgramLanding)** experience.
 
 ## 🌍 From Earth to the stars
 
