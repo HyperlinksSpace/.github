@@ -6,7 +6,7 @@ The core operating system for a multi-planetary future — not only how networks
 
 ## 🔭 Our mission
 
-At Hyperlinks Space, we believe that the expansion of humanity into the stars depends on one thing: the seamless flow of information and value. We are building the protocols, AI models, and financial layers that will connect Earth, the Moon, and Mars into a single, unified cognitive network.
+At Hyperlinks Space, we believe that the expansion of humanity in the space depends on the seamless flow of information and value. We are building the protocols, AI models, and financial layers that will connect Earth, the Moon, and Mars into a single, unified cognitive network.
 
 We do not just build software; we build the **digital nervous system** for the next stage of human evolution — spanning extraction, logistics, communication, computation, habitation, supply, expansion, and recovery — with **Earth as the anchor economy** and every other destination on the same rails.
 
