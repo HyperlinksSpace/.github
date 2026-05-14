@@ -89,9 +89,21 @@ Our roadmap for deploying localized nodes **across Earth and the solar system**.
 
 ## 🌍 From Earth to the stars
 
-Founded in the heart of Eurasia, Hyperlinks Space was born from a radical idea: we build trully innovative company, business and enterprise that are driven by the more vision more than by an office in a skyscraper, still with it of course 😊.
+Founded in the heart of Eurasia, Hyperlinks Space was born from a radical idea: we build **truly innovative companies and enterprises** driven more by **vision and execution** than by a postcode in a skyscraper — without losing the discipline of shipping real systems.
 
-The company operates across multiple industries internationally — AI, blockchain, and social networks in IT, on many devices and operating systems, with involvement in finance and human engineering. Our [landing program](https://www.landing.app.hyperlinks.space) partially reveals the Hyperlinks Space Program we are developing. You can follow this resource’s development in the [Production Report](../ProductionReport.md).
+A cross-planetary economy does not simply “copy-paste” today’s industries. It **spawns whole new families** of practice: different gravity, radiation, day length, logistics lag, and closed-loop constraints force **new launch physics, new construction methods, new medicine, new food systems**, and new coordination layers on top. That is the demand surface our stack is meant to serve.
+
+**Industries and frontiers we design for (non-exhaustive):**
+
+- **Launch and access to space — Earth and elsewhere** — pads and ranges **on Earth** remain critical, but **satellites, cargo, and crews** will also leave **from the Moon, Mars, and free space** using **other principles** than chemical sea-level stacks alone: electromagnetic and **mass-driver** launch, **spin** or **tether** assist, **skyhooks** and cislunar tugs, **in-situ propellant** (LOX/methane, metal fuels, volatiles), and **assembly-and-go** stacks where the “first stage” is local industry, not a single-planet supply chain.
+- **Building and civil infrastructure** — pressurized volumes, radiation shells, **ISRU** structural materials, vacuum-adapted welding and printing, **orbital and surface megamodules**, roads and berms on airless worlds, and the **digital twins** that keep megaprojects insurable across decades.
+- **Medicine and human performance** — **telepresence surgery** and remote clinics, **radiation** oncology and countermeasures, **partial-gravity** physiology, closed-habitat **pharma and biomanufacturing**, mental-health protocols for isolation, and **population-scale health logistics** tied to supply graphs.
+- **Agriculture and food systems** — **hydroponics, aeroponics, algae, and bioreactors**; protein and calorie closure targets; **perchlorate-safe** and **dust-aware** food chains on Mars; **terrestrial spin-offs** for desert, polar, and urban vertical farming where the same control stacks apply.
+- **Energy, mobility, and robotics** — surface **solar and nuclear** baseload, **beamed power** experiments, **cold-trap** volatiles, autonomous **rovers, cranes, and fab lines**, and fleets that maintain themselves (the same Von Neumann logic as elsewhere in this README).
+- **Materials, chemistry, and industry 4.0+** — refining from regolith and brine, **metallurgy in vacuum**, **3D printing** of spare civilization, QA and **provenance** for every batch that might ride a lander leg.
+- **Coordination industries** — **finance, insurance, law, education, media, and standards bodies** rebuilt for **multi-hour light-lag**, multi-jurisdiction settlements, and **custodied physical assets**; Hyperlinks focuses on the **protocols, AI, and financial rails** these sectors plug into.
+
+The company operates across multiple industries internationally, for example AI, blockchain, and social networks in IT, on many devices and operating systems, in finance, human engineering. Our [landing program](https://www.landing.app.hyperlinks.space) partially reveals the Hyperlinks Space Program we are developing. You can follow this resource’s development in the [Production Report](../ProductionReport.md).
 
 ## 🚀 Join the expansion
 
